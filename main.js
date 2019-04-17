@@ -1,27 +1,35 @@
 var todoList = {
-  todos: ["item 1", "item 2", "item 3"],
+  todos: [],
 
   displayTodos: function() {
     console.log(this.todos);
   },
 
-  addTodo: function(newTodo) {
-    this.todos.push(newTodo);
+  addTodo: function(todoText) {
+    this.todos.push({
+      todoText: todoText,
+      completed: false
+    });
     this.displayTodos();
   },
 
-  changeTodo: function(index, change) {
-    this.todos[index] = change;
+  changeTodo: function(index, todoText) {
+    this.todos[index].todoText = todoText;
     this.displayTodos();
   },
 
   deleteTodo: function(index) {
     this.todos.splice(index, 1);
     this.displayTodos();
+  },
+
+  toggleCompleted: function(index) {
+    this.todos[index].completed = !this.todos[index].completed;
+    this.displayTodos();
   }
 };
 
-todoList.displayTodos();
-todoList.addTodo("item 4");
-todoList.changeTodo(3, "item 5");
-todoList.deleteTodo(1);
+//todoList.displayTodos();
+//todoList.addTodo("item 4");
+//todoList.changeTodo(3, "item 5");
+//todoList.deleteTodo(1);
