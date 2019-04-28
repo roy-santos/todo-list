@@ -19,3 +19,5 @@ version7: HTML and DOM
 version8: data from inputs
 
 version9: escaping the console
+
+version10: click to delete button
