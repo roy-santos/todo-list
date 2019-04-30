@@ -21,3 +21,5 @@ version8: data from inputs
 version9: escaping the console
 
 version10: click to delete button
+
+version11: replace for loops with forEach method
