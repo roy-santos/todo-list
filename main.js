@@ -23,25 +23,21 @@ var todoList = {
     var totalTodos = this.todos.length;
     var completedTodos = 0;
 
-    //Get the number of completed todos
-    for (var i = 0; i < totalTodos; i++) {
-      if (this.todos[i].completed === true) {
+    this.todos.forEach(function(todo) {
+      if (todo.completed === true) {
         completedTodos++;
       }
-    }
+    });
 
-    //Case 1: checks everything is true, make it false
-    if (completedTodos === totalTodos) {
-      //Make everything false
-      for (var j = 0; j < totalTodos; j++) {
-        this.todos[j].completed = false;
+    this.todos.forEach(function(todo) {
+      //Case 1: Check if everything is true, make it false
+      if (completedTodos === totalTodos) {
+        todo.completed = false;
+      } else {
+        //Case 2: Otherwise, make everything true.
+        todo.completed = true;
       }
-    } else {
-      //Case 2: Otherwise, make everything true.
-      for (var k = 0; k < totalTodos; k++) {
-        this.todos[k].completed = true;
-      }
-    }
+    });
   }
 };
 
@@ -85,12 +81,11 @@ var handlers = {
 
 var view = {
   displayTodos: function() {
-    var todosUl = document.querySelector("ul");
+    var todosUl = document.querySelector("Ul");
     todosUl.innerHTML = "";
 
-    for (var i = 0; i < todoList.todos.length; i++) {
+    todoList.todos.forEach(function(todo, position) {
       var todoLi = document.createElement("li");
-      var todo = todoList.todos[i];
       var todoTextWithCompletion = "";
 
       if (todo.completed === true) {
@@ -99,12 +94,11 @@ var view = {
         todoTextWithCompletion = "( ) " + todo.todoText + " ";
       }
 
-      todoLi.id = i;
+      todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
-      debugger;
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
-    }
+    }, this);
   },
   createDeleteButton: function() {
     var deleteButton = document.createElement("button");
@@ -113,7 +107,7 @@ var view = {
     return deleteButton;
   },
   setUpEventListeners: function() {
-    var todosUl = document.querySelector("ul");
+    var todosUl = document.querySelector("Ul");
 
     todosUl.addEventListener("click", function(event) {
       console.log(event.target.parentNode.id);
